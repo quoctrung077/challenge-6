@@ -1,0 +1,23 @@
+@import "../base/mixins";
+@import "../base/variables";
+.btn-primary {
+  @include btn-primary($background-color-primary, $color-primary);
+}
+
+.btn-outline-primary {
+  @include btn-outline-primary($background-color-secondary, $color-secondary);
+}
+
+.btn-secondary {
+  @include btn-secondary;
+}
+
+.btn-primary-custom {
+  @include btn-primary-custom;
+}
+.ladda-button{
+  @include ladda-button;
+}
+.secondary-button{
+  @include secondary-button;
+}
