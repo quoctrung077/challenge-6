@@ -14,7 +14,14 @@ $(document).ready(function () {
     clickTags();
     playVideo();
     isOpen();
+    login();
 });
+
+function login() {
+    $('.ladda-button').on('click', function () {
+        window.location.href = "login.html";
+    });
+}
 
 let selectedWrappers = [];
 function clickTags() {
@@ -153,7 +160,7 @@ function isOpen() {
     items.on('click', function () {
         const index = items.index(this);
         const targetMenu = headerMenus.eq(index);
-        
+
         // Kiểm tra nếu phần tử được click đã có class 'is-open'
         if ($(this).hasClass('is-open')) {
             $(this).removeClass('is-open');
@@ -170,3 +177,4 @@ function isOpen() {
         }
     });
 }
+

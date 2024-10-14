@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
 body {
   font-family: "Poppins", "Roboto", sans-serif;
   font-weight: 300;
@@ -9,10 +11,13 @@ img {
   object-fit: contain;
 }
 
-video{
+video {
   display: inline-block;
 }
 
-a{
+a {
   text-decoration: none;
+}
+* {
+  box-sizing: border-box;
 }

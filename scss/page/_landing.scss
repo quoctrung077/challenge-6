@@ -74,10 +74,10 @@
                     display: flex;
                     align-items: center;
                     .link-item-with-menu-component {
-                      &.is-open{
+                      &.is-open {
                         color: #5034ff;
                         background-color: #f0f3ff;
-                        .link-item-with-menu-icon{
+                        .link-item-with-menu-icon {
                           transform: rotate(180deg);
                         }
                       }
