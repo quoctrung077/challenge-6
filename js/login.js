@@ -74,8 +74,7 @@ async function handleFormSubmit(event, action) {
             }
         } else if (action === 'signin') {
             if (response.ok) {
-                alert('Đăng nhập thành công!');
-                window.location.href = '#';
+                window.location.href = 'sidebar.html';
             } else {
                 showInputError(emailInput);
                 showInputError(passwordInput);
