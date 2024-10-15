@@ -2337,10 +2337,10 @@ section .footerComponent .footerComponent__mobile {
 .background .btn__toggle:hover {
   background-color: #c2c2c2;
 }
-.background .sidebar.collapsed + .btn__toggle {
+.background .collapsed .btn__toggle {
   left: 90px;
 }
-.background .sidebar.collapsed + .btn__toggle .arrow {
+.background .collapsed .btn__toggle .arrow {
   transform: rotate(180deg);
 }
 @keyframes fall {
