@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>USERS</title>
+  </head>
+  <body>
+    <div class="background">
+      <div class="sidebar">
+        <div class="sidebar__header">
+          <div class="logo logo__a">
+            <img src="image/icons/Logo.svg" alt="" />
+          </div>
+          <div class="logo logo__b">
+            <img src="image/icons/B..svg" alt="" />
+          </div>
+        </div>
+        <ul class="sidebar__menu">
+          <li>
+            <a href="users.html"
+              ><img src="image/icons/icon-user.svg" alt="" /> <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a href="project.html"
+              ><img src="image/icons/icon-project-2.svg" alt="" />
+              <span>Projects</span></a
+            >
+          </li>
+        </ul>
+        <button class="btn__toggle">
+          <img class="arrow" src="image/icons/arrow-left.svg" alt="" />
+        </button>
+      </div>
+      <div class="main-content">
+        <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="from-page">
+          <div class="page-title">
+            <h2>Users' List</h2>
+          </div>
+          <div class="btn-add-user-search">
+            <div class="btn-add-user">
+              <button class="btn-new-user">
+                <div class="icon-plus">
+                  <img src="image/icons/icon-plus.svg" alt="" />
+                </div>
+                Add User
+              </button>
+            </div>
+            <div class="input-container">
+              <input
+                type="text"
+                id="search"
+                placeholder="Search..."
+                class="search"
+                src="image/icons/icon-search.svg"
+              />
+              <div class="icon-search">
+                <img src="image/icons/icon-search.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="table-container">
+            <table id="userTable" class="display" style="width: 100%">
+              <thead>
+                <tr style="height: 40px">
+                  <th>#</th>
+                  <th>Uses Name</th>
+                  <th>E-Mail</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="from-page" style="display: none">
+          <div class="page-title">
+            <div class="page-arrow">
+              <img src="./image/icons/arrow-left.svg" alt="" />
+            </div>
+            <h2>Detail User</h2>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="input-wrap">
+                <label for="username"
+                  >User Name<span style="color: red">*</span></label
+                >
+                <input type="text" id="username" name="username" required />
+              </div>
+              <div class="input-wrap">
+                <label for="email"
+                  >Email<span style="color: red">*</span></label
+                >
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="button__group">
+                <button type="button" class="btn-form cancel-btn">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="from-page" style="display: none">
+          <div class="page-title">
+            <div class="page-arrow">
+              <img src="./image/icons/arrow-left.svg" alt="" />
+            </div>
+            <h2>Update User</h2>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="input-wrap">
+                <label for="username"
+                  >User Name<span style="color: red">*</span></label
+                >
+                <input type="text" id="username" name="username" required />
+              </div>
+              <div class="input-wrap">
+                <label for="password"
+                  >Password<span style="color: red">*</span></label
+                >
+                <input type="password" id="password" name="password" required />
+              </div>
+              <div class="input-wrap">
+                <label for="email"
+                  >Email<span style="color: red">*</span></label
+                >
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="button__group">
+                <button type="button" class="btn-form cancel-btn">
+                  Change Password
+                </button>
+                <button type="button" class="btn-form cancel-btn">Save</button>
+                <button type="button" class="btn-form cancel-btn">
+                  Cancel
+                </button>
+              </div>
+            </form>
+            <div class="box-change-password">
+              <div class="icon-x">
+                <img src="./image/icons/icon-x.svg" alt="" />
+              </div>
+              <div class="input-wrap">
+                <label for="password"
+                  >Password<span style="color: red">*</span></label
+                >
+                <input type="password" id="password" name="password" required />
+              </div>
+              <div class="input-wrap">
+                <label for="email"
+                  >Email<span style="color: red">*</span></label
+                >
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="button__group">
+                <button type="button" class="btn-form cancel-btn">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="./js/users.js"></script>
+  </body>
+</html>

@@ -15,9 +15,19 @@
 .btn-primary-custom {
   @include btn-primary-custom;
 }
-.ladda-button{
+
+.ladda-button {
   @include ladda-button;
 }
-.secondary-button{
+
+.secondary-button {
   @include secondary-button;
+}
+
+.btn-form {
+  @include btn-form;
+}
+
+.input-wrap {
+  @include input-wrap;
 }
