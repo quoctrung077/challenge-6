@@ -191,6 +191,12 @@
           padding-top: 11px;
           padding-bottom: 9px;
           padding-right: 14px;
+          transition: transform 0.2s ease-in-out;
+          transform-origin: top right;
+          cursor: pointer;
+          &:hover {
+            transform: scale(0.9);
+          }
         }
         .input-wrap {
           margin-bottom: 16px;

@@ -43,7 +43,7 @@ async function fetchUserData(query = null) {
     }
 }
 
-async function attachDeleteUserEvents() {
+function attachDeleteUserEvents() {
     $('#userTable').on('click', '.btn-delete', async function () {
         const row = $(this).closest('tr');
         const userId = row.data('user-id');
@@ -282,20 +282,20 @@ function attachUpdateUserEvents() {
               <div class="icon-x">
                 <img src="./image/icons/icon-x.svg" alt="" />
               </div>
-              <div class="input-wrap">
-                <label for="password"
-                  >Password<span style="color: red">*</span></label
-                >
-                <input type="password" id="password" name="password" required />
-              </div>
-              <div class="input-wrap">
+                <div class="input-wrap">
                 <label for="email"
                   >Email<span style="color: red">*</span></label
                 >
-                <input type="email" id="email" name="email" required />
+                <input type="email" id="email" name="email" value="${userUpdate.email}" required readonly/>
+              </div>
+              <div class="input-wrap">
+                <label for="password"
+                  >New Password<span style="color: red">*</span></label
+                >
+                <input type="password" id="new-password" name="new password" required readonly />
               </div>
               <div class="button__group">
-                <button type="button" class="btn-form cancel-btn">Apply</button>
+                <button type="button" class="btn-form apply-btn">Apply</button>
               </div>
             </div>
           </div>
@@ -305,6 +305,14 @@ function attachUpdateUserEvents() {
 
             $('.cancel-btn').on('click', function () {
                 window.location.href = 'users.html';
+            });
+
+            $('.changePassword-btn').on('click', function () {
+                $('.box-change-password').show();
+            })
+
+            $('.box-change-password').on('click', '.icon-x', function () {
+                $('.box-change-password').hide();
             });
 
             $('#updateUserForm').on('submit', async function (event) {
@@ -338,13 +346,42 @@ function attachUpdateUserEvents() {
                     alert('Lỗi khi cập nhật người dùng.');
                 }
             });
+
+            $('.box-change-password').on('click', '.apply-btn', async function () {
+                const newPassword = $('#new-password').val();
+                const email = $('#email').val();
+
+                try {
+                    const passwordResponse = await fetch(`${ENDPOINT}/users/forgot-password`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password: newPassword
+                        })
+                    });
+
+                    if (passwordResponse.ok) {
+                        alert('Mật khẩu đã được cập nhật thành công.', newPassword);
+                        $('#new-password').attr('type', 'text').val(newPassword);
+                    } else {
+                        const errorData = await passwordResponse.json();
+                        alert('' + errorData.message);
+                    }
+                } catch (error) {
+                    console.error('Error updating password:', error);
+                    alert('Lỗi khi cập nhật mật khẩu.');
+                }
+            });
+
         } catch (error) {
             console.error('Error fetching user details for update:', error);
             alert('Không thể lấy thông tin người dùng.');
         }
     });
 }
-
 
 function attachSidebarEvents() {
     $(".btn__toggle").click(function () {

@@ -2411,6 +2411,12 @@ section .footerComponent .footerComponent__mobile {
   padding-top: 11px;
   padding-bottom: 9px;
   padding-right: 14px;
+  transition: transform 0.2s ease-in-out;
+  transform-origin: top right;
+  cursor: pointer;
+}
+.background .main-content .from-page .box-change-password .icon-x:hover {
+  transform: scale(0.9);
 }
 .background .main-content .from-page .box-change-password .input-wrap {
   margin-bottom: 16px;
