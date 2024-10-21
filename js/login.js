@@ -24,45 +24,60 @@ async function handleFormSubmit(event, action) {
 
     clearInputErrors([usernameInput, emailInput, passwordInput]);
 
-    let hasError = false;
 
     if (action === 'signup') {
-        hasError = [
-            !validateUsername(usernameInput.value.trim()) && showInputError(usernameInput),
-            !validateEmail(emailInput.value.trim()) && showInputError(emailInput),
-            !validatePassword(passwordInput.value.trim()) && showInputError(passwordInput)
-        ].some(Boolean);
+        hasError = false;
+
+        if (!validateUsername(usernameInput.value.trim())) {
+            showInputError(usernameInput);
+            hasError = true;
+        }
+
+        if (!validateEmail(emailInput.value.trim())) {
+            showInputError(emailInput);
+            hasError = true;
+        }
+
+        if (!validatePassword(passwordInput.value.trim())) {
+            showInputError(passwordInput);
+            hasError = true;
+        }
+        console.log('hasError (signup):', hasError);
     } else if (action === 'signin') {
-        hasError = [
-            !validateEmail(emailInput.value.trim()) && showInputError(emailInput),
-            !validatePassword(passwordInput.value.trim()) && showInputError(passwordInput)
-        ].some(Boolean);
+        hasError = false;
+        if (!validateEmail(emailInput.value.trim())) {
+            showInputError(emailInput);
+            hasError = true;
+        }
+
+        if (!validatePassword(passwordInput.value.trim())) {
+            showInputError(passwordInput);
+            hasError = true;
+        }
     }
 
     if (hasError) {
+        console.log("Có lỗi trong dữ liệu đầu vào");
         return;
+    }
+    const bodyData = {
+        email: emailInput.value.trim(),
+        password: passwordInput.value.trim(),
+    };
+
+    if (action === 'signup') {
+        bodyData.username = usernameInput.value.trim();
     }
 
     submitButton.disabled = true;
     submitButton.textContent = 'Processing...';
 
     try {
-        const bodyData = {
-            email: emailInput.value.trim(),
-            password: passwordInput.value.trim(),
-        };
-
-        if (action === 'signup') {
-            bodyData.username = usernameInput.value.trim();
-        }
-
         const response = await fetch(`${ENDPOINT}/users/${action === 'signup' ? 'register' : 'login'}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bodyData),
         });
-
-        const result = await response.json();
 
         if (action === 'signup') {
             if (response.status === 409) {
@@ -74,7 +89,10 @@ async function handleFormSubmit(event, action) {
             }
         } else if (action === 'signin') {
             if (response.ok) {
-                window.location.href = 'sidebar.html';
+                const responseData = await response.json();
+                const token = responseData.token;
+                localStorage.setItem('authToken', token);
+                window.location.href = 'users.html';
             } else {
                 showInputError(emailInput);
                 showInputError(passwordInput);
@@ -88,7 +106,6 @@ async function handleFormSubmit(event, action) {
         submitButton.textContent = action === 'signup' ? 'Register' : 'Sign In';
     }
 }
-
 
 function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;

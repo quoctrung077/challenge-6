@@ -1,0 +1,181 @@
+#userTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#userTable th,
+#userTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+  &:first-child {
+    text-align: center;
+  }
+  &:last-child {
+    text-align: center;
+  }
+}
+
+#userTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  &:first-child {
+    width: 64px;
+  }
+  &:last-child {
+    width: 184px;
+  }
+}
+#userTable tbody tr {
+  height: 56px;
+}
+#userTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+
+#userTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-detail {
+  padding: 0;
+  display: inline-flex;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+.dataTables_wrapper .dataTables_paginate {
+  display: flex;
+  margin-top: 1em;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  margin-right: 8px;
+  height: 40px;
+  width: 40px;
+  display: inline-flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #ddd;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  border: 1px solid var(--Functional-Primary-Normal, #0057fc);
+  color: var(--Functional-Primary-Normal, #0057fc);
+}
+
+#projectTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#projectTable th,
+#projectTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+  &:first-child {
+    text-align: center;
+  }
+  &:last-child {
+    text-align: center;
+  }
+}
+
+#projectTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  &:first-child {
+    width: 64px;
+  }
+  &:last-child {
+    width: 184px;
+  }
+}
+
+#projectTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+
+#projectTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#memberTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#memberTable th,
+#memberTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+  &:first-child {
+    text-align: center;
+  }
+}
+
+#memberTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  &:first-child {
+    width: 64px;
+  }
+}
+
+#memberTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+
+#memberTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#usersTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#usersTable th,
+#usersTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#usersTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+  &.selected {
+    background-color: #d6f5f5;
+  }
+}
+
+#usersTable tbody tr:nth-child(even) {
+  background-color: #fff;
+  &.selected {
+    background-color: #d6f5f5;
+  }
+}

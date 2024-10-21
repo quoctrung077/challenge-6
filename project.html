@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>PROJECT</title>
+  </head>
+  <body>
+    <div class="background">
+      <div class="sidebar">
+        <div class="sidebar__header">
+          <div class="logo logo__a">
+            <img src="image/icons/Logo.svg" alt="" />
+          </div>
+          <div class="logo logo__b">
+            <img src="image/icons/B..svg" alt="" />
+          </div>
+        </div>
+        <ul class="sidebar__menu">
+          <li>
+            <a href="users.html"
+              ><img src="image/icons/icon-user.svg" alt="" /> <span>Users</span>
+            </a>
+          </li>
+          <li class="select">
+            <a href="project.html"
+              ><img src="image/icons/icon-project-2.svg" alt="" />
+              <span>Projects</span></a
+            >
+          </li>
+        </ul>
+        <button class="btn__toggle">
+          <img class="arrow" src="image/icons/arrow-left.svg" alt="" />
+        </button>
+      </div>
+      <div class="sidebar-mobile-wrapper" style="display: none">
+        <div class="icon-menu">
+          <img src="image/icons/menu-mobile-icon.svg" alt="" />
+        </div>
+        <div class="sidebar-mobile" style="display: none">
+          <div class="sidebar__header">
+            <div class="logo logo__b">
+              <img src="image/icons/B..svg" alt="" />
+            </div>
+          </div>
+          <ul class="sidebar__menu">
+            <li>
+              <a href="users.html"
+                ><img src="image/icons/icon-user.svg" alt="" />
+                <span>Users</span>
+              </a>
+            </li>
+            <li class="select">
+              <a href="project.html"
+                ><img src="image/icons/icon-project-2.svg" alt="" />
+                <span>Projects</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-content" s>
+        <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="from-page">
+          <div class="page-title">
+            <h2>Project' List</h2>
+          </div>
+          <div class="btn-add-search">
+            <div class="btn-add">
+              <button class="btn-new-project">
+                <div class="icon-plus">
+                  <img src="image/icons/icon-plus.svg" alt="" />
+                </div>
+                New Project
+              </button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table id="projectTable" class="display" style="width: 100%">
+              <thead>
+                <tr style="height: 40px">
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="./js/projects.js"></script>
+  </body>
+</html>
