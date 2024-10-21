@@ -2428,16 +2428,17 @@ section .footerComponent .footerComponent__mobile {
   display: flex;
   justify-content: flex-end;
 }
-.background .main-content .from-page .btn-add-user-search {
+.background .main-content .from-page .btn-add-search {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
-.background .main-content .from-page .btn-add-user-search .btn-add-user {
+.background .main-content .from-page .btn-add-search .btn-add {
   height: 40px;
 }
-.background .main-content .from-page .btn-add-user-search .btn-add-user button {
+.background .main-content .from-page .btn-add-search .btn-add button {
+  cursor: pointer;
   gap: 8px;
   height: 100%;
   font-size: 14px;
@@ -2453,13 +2454,13 @@ section .footerComponent .footerComponent__mobile {
   border: 1px solid #0057fc;
   border-radius: 8px;
 }
-.background .main-content .from-page .btn-add-user-search .btn-add-user button .icon-plus {
+.background .main-content .from-page .btn-add-search .btn-add button .icon-plus {
   width: 20px;
   height: 20px;
   display: flex;
   align-items: center;
 }
-.background .main-content .from-page .btn-add-user-search .btn-add-user button .icon-plus img {
+.background .main-content .from-page .btn-add-search .btn-add button .icon-plus img {
   height: 10.42px;
 }
 .background .main-content .from-page .input-container {
@@ -2514,6 +2515,41 @@ section .footerComponent .footerComponent__mobile {
   100% {
     transform: translateY(0);
   }
+}
+
+.background .main-content .from-page .form {
+  position: relative;
+}
+.background .main-content .from-page .form form .date-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 104px;
+}
+.background .main-content .from-page .form form .date-wrapper .input-wrap {
+  flex-grow: 1;
+}
+.background .main-content .from-page .form form .table-member-container .dataTables_paginate {
+  position: unset;
+}
+.background .main-content .from-page .form form .box-add-user-project {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  max-width: 480px;
+  background-color: #fbfafa;
+  border-radius: 20px;
+  margin-top: 10px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 23px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.background .main-content .from-page .form form .box-add-user-project .icon-x {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -2787,6 +2823,106 @@ section .footerComponent .footerComponent__mobile {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
   border: 1px solid var(--Functional-Primary-Normal, #0057fc);
   color: var(--Functional-Primary-Normal, #0057fc);
+}
+
+#projectTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#projectTable th,
+#projectTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+#projectTable th:first-child,
+#projectTable td:first-child {
+  text-align: center;
+}
+#projectTable th:last-child,
+#projectTable td:last-child {
+  text-align: center;
+}
+
+#projectTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+#projectTable th:first-child {
+  width: 64px;
+}
+#projectTable th:last-child {
+  width: 184px;
+}
+
+#projectTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+
+#projectTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#memberTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#memberTable th,
+#memberTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+#memberTable th:first-child,
+#memberTable td:first-child {
+  text-align: center;
+}
+
+#memberTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+#memberTable th:first-child {
+  width: 64px;
+}
+
+#memberTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+
+#memberTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#usersTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#usersTable th,
+#usersTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#usersTable tbody tr:nth-child(odd) {
+  background-color: var(--Neutral-200, #e9ecef);
+}
+#usersTable tbody tr:nth-child(odd).selected {
+  background-color: #d6f5f5;
+}
+
+#usersTable tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+#usersTable tbody tr:nth-child(even).selected {
+  background-color: #d6f5f5;
 }
 
 body {

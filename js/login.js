@@ -89,6 +89,9 @@ async function handleFormSubmit(event, action) {
             }
         } else if (action === 'signin') {
             if (response.ok) {
+                const responseData = await response.json();
+                const token = responseData.token;
+                localStorage.setItem('authToken', token);
                 window.location.href = 'users.html';
             } else {
                 showInputError(emailInput);
@@ -103,7 +106,6 @@ async function handleFormSubmit(event, action) {
         submitButton.textContent = action === 'signup' ? 'Register' : 'Sign In';
     }
 }
-
 
 function validateEmail(email) {
     const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;

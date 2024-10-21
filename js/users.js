@@ -25,7 +25,7 @@ $(document).ready(function () {
     attachDetailEvents();
     attachUpdateUserEvents();
     attachDeleteUserEvents();
-
+    logout();
 });
 
 let table;
@@ -292,7 +292,7 @@ function attachUpdateUserEvents() {
                 <label for="password"
                   >New Password<span style="color: red">*</span></label
                 >
-                <input type="password" id="new-password" name="new password" required readonly />
+                <input type="password" id="new-password" name="new password" required />
               </div>
               <div class="button__group">
                 <button type="button" class="btn-form apply-btn">Apply</button>
@@ -364,8 +364,10 @@ function attachUpdateUserEvents() {
                     });
 
                     if (passwordResponse.ok) {
-                        alert('Mật khẩu đã được cập nhật thành công.', newPassword);
-                        $('#new-password').attr('type', 'text').val(newPassword);
+                        const responseData = await passwordResponse.json();
+                        const serverPassword = responseData.newPassword;
+                        alert('Mật khẩu đã được cập nhật thành công.', serverPassword);
+                        $('#new-password').attr('type', 'text').val(serverPassword).prop('readonly', true);
                     } else {
                         const errorData = await passwordResponse.json();
                         alert('' + errorData.message);
@@ -395,5 +397,13 @@ function attachSidebarEvents() {
                 $(".logo-a").fadeIn(400);
             });
         }
+    });
+}
+
+function logout() {
+    $('.logout').on('click', function () {
+
+        localStorage.removeItem('authToken');
+        window.location.href = 'login.html';
     });
 }

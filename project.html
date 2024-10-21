@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="./css/main.css" />
-    <title>USERS</title>
+    <title>PROJECT</title>
   </head>
   <body>
     <div class="background">
@@ -35,7 +35,7 @@
           <img class="arrow" src="image/icons/arrow-left.svg" alt="" />
         </button>
       </div>
-      <div class="main-content">
+      <div class="main-content" s>
         <div class="profile-component">
           <div class="profile">
             <div class="profile__title">Trung Huynh</div>
@@ -46,37 +46,27 @@
         </div>
         <div class="from-page">
           <div class="page-title">
-            <h2>Users' List</h2>
+            <h2>Project' List</h2>
           </div>
           <div class="btn-add-search">
             <div class="btn-add">
-              <button class="btn-new-user">
+              <button class="btn-new-project">
                 <div class="icon-plus">
                   <img src="image/icons/icon-plus.svg" alt="" />
                 </div>
-                Add User
+                New Project
               </button>
-            </div>
-            <div class="input-container">
-              <input
-                type="text"
-                id="search"
-                placeholder="Search..."
-                class="search"
-                src="image/icons/icon-search.svg"
-              />
-              <div class="icon-search">
-                <img src="image/icons/icon-search.svg" alt="" />
-              </div>
             </div>
           </div>
           <div class="table-container">
-            <table id="userTable" class="display" style="width: 100%">
+            <table id="projectTable" class="display" style="width: 100%">
               <thead>
                 <tr style="height: 40px">
                   <th>#</th>
-                  <th>Uses Name</th>
-                  <th>E-Mail</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
                   <th></th>
                 </tr>
               </thead>
@@ -88,6 +78,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="./js/users.js"></script>
+    <script src="./js/projects.js"></script>
   </body>
 </html>
