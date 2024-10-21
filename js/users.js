@@ -18,6 +18,18 @@ $(document).ready(function () {
             },
         },
     });
+
+    $(document).ready(function () {
+        $('.icon-menu').on('click', function () {
+            $('.sidebar-mobile').toggle();
+        });
+
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest('.sidebar-mobile').length && !$(event.target).closest('.icon-menu').length) {
+                $('.sidebar-mobile').hide();
+            }
+        });
+    });
     searchTable();
     fetchUserData();
     attachSidebarEvents();
@@ -26,6 +38,8 @@ $(document).ready(function () {
     attachUpdateUserEvents();
     attachDeleteUserEvents();
     logout();
+    adjustPageLength();
+    abc();
 });
 
 let table;
@@ -100,7 +114,16 @@ function populateTable(users) {
 
 function attachAddEvents() {
     $(".btn-new-user").on("click", function () {
-        const addUserlHTML = `
+        const addUserlHTML =
+            `
+        <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
         <div class="from-page"">
           <div class="page-title">
             <div class="page-arrow">
@@ -198,6 +221,14 @@ function attachDetailEvents() {
             const userDetail = await response.json();
 
             const DetailUserlHTML = `
+            <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
                 <div class="from-page">
                     <div class="page-title">
                         <div class="page-arrow">
@@ -247,6 +278,14 @@ function attachUpdateUserEvents() {
             const userUpdate = await response.json();
 
             const updateUserHTML = `
+            <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
         <div class="from-page">
           <div class="page-title">
             <div class="page-arrow">
@@ -407,3 +446,12 @@ function logout() {
         window.location.href = 'login.html';
     });
 }
+
+function adjustPageLength() {
+    const windowWidth = $(window).width();
+    const newPageLength = windowWidth < 768 ? 3 : 8;
+    table.page.len(newPageLength).draw();
+}
+
+
+$(window).on("resize", adjustPageLength);

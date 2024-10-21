@@ -1,12 +1,69 @@
+@use "../base/mixins" as *;
 .background {
   background-color: #e9e9e9;
   display: flex;
+  @include responsive(tablet) {
+    .sidebar-mobile-wrapper {
+      display: block !important ;
+      position: absolute;
+      top: 15px;
+      left: 30px;
+      .icon-menu {
+        width: 35px;
+        cursor: pointer;
+      }
+      .sidebar-mobile {
+        background-color: #212529;
+        width: 200px;
+        border-radius: 15px;
+        z-index: 200;
+        position: fixed;
+        padding: 15px;
+        .logo {
+          padding: 10px;
+        }
+        .sidebar__header {
+          margin-bottom: 10px;
+        }
+        .sidebar__menu {
+          display: flex;
+          gap: 8px;
+          flex-direction: column;
+          li {
+            margin: 0 10px;
+            &.select {
+              background-color: #343a40;
+              border-radius: 8px;
+            }
+            a {
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              padding: 12px 0 12px 12px;
+              border-radius: 8px;
+              span {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 24px;
+                letter-spacing: 0.025em;
+                text-transform: uppercase;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .sidebar {
     background-color: #212529;
     height: 100vh;
     width: 240px;
     transition: width 0.4s ease, padding 0.4s ease;
     overflow: hidden;
+    @include responsive(tablet) {
+      display: none;
+    }
     &.collapsed {
       width: 112px;
 
@@ -59,6 +116,10 @@
       gap: 8px;
       li {
         margin: 0 32px;
+        &.select {
+          background-color: #343a40;
+          border-radius: 8px;
+        }
         a {
           display: flex;
           gap: 8px;
@@ -91,10 +152,14 @@
     flex-direction: column;
     gap: 28px;
     flex-grow: 1;
+    height: 100vh;
     .profile-component {
       height: 64px;
       width: 100%;
       position: relative;
+      @include responsive(tablet) {
+        position: unset;
+      }
       .profile {
         display: flex;
         width: 184px;
@@ -107,6 +172,9 @@
         position: absolute;
         right: 32px;
         margin: 12px 0;
+        @include responsive(tablet) {
+          width: 150px;
+        }
         .profile__title {
           color: #343a40;
           font-size: 14px;
@@ -121,12 +189,13 @@
       }
     }
     .from-page {
+      // @include responsive(tablet) {
+      // }
       display: flex;
       flex-direction: column;
       margin: 0 32px;
       height: 100%;
       margin-bottom: 56px;
-
       .page-title {
         display: flex;
         gap: 8px;
@@ -251,6 +320,9 @@
           border: 1px solid var(--Neutral-400, #ced4da);
           width: 320px;
           padding: 12px 12px 12px 32px;
+          @include responsive(tablet) {
+            width: fit-content;
+          }
         }
         .icon-search {
           position: absolute;

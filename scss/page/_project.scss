@@ -1,3 +1,4 @@
+@use "../base/mixins" as *;
 .background .main-content .from-page .form {
   position: relative;
   form {
@@ -5,6 +6,9 @@
       display: flex;
       justify-content: space-between;
       gap: 104px;
+      @include responsive(tablet) {
+        gap: 50px;
+      }
       .input-wrap {
         flex-grow: 1;
       }

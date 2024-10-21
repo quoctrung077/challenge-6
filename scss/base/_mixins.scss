@@ -1,3 +1,21 @@
+$breakpoints: (
+  phone-sm: 420px,
+  phone: 767px,
+  tablet: 768px,
+  tablet-lg: 1024px,
+  desktop: 1025px,
+  desktop-lg: 1600px,
+);
+
+@function breakpoint($breakpoint-name) {
+  @return map-get($breakpoints, $breakpoint-name);
+}
+
+@mixin responsive($breakpoint, $media-type: "max-width") {
+  @media (#{$media-type}: breakpoint($breakpoint)) {
+    @content;
+  }
+}
 @mixin btn-primary($bg-color, $text-color) {
   display: flex;
   justify-content: center;
@@ -185,6 +203,9 @@
   letter-spacing: 0.025em;
   text-transform: uppercase;
   cursor: pointer;
+  @include responsive(tablet) {
+    font-size: 10px;
+  }
   &:hover {
     background-color: #eeeeee;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,

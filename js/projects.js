@@ -20,12 +20,25 @@ $(document).ready(function () {
     },
   });
 
+  $(document).ready(function () {
+    $('.icon-menu').on('click', function () {
+      $('.sidebar-mobile').toggle();
+    });
+
+    $(document).on('click', function (event) {
+      if (!$(event.target).closest('.sidebar-mobile').length && !$(event.target).closest('.icon-menu').length) {
+        $('.sidebar-mobile').hide();
+      }
+    });
+  });
+
   logout();
   attachAddEvents();
   fetchProjectData();
   attachDeleteProjectEvents();
   attachDetailProjectEvents();
   attachUpdateProjectEvents();
+  attachSidebarEvents();
 });
 
 // -- log out --
@@ -39,6 +52,14 @@ function logout() {
 function attachAddEvents() {
   $(".btn-new-project").on("click", function () {
     const addProjectHTML = `
+    <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
       <div class="from-page">
         <div class="page-title">
           <div class="page-arrow">
@@ -169,14 +190,19 @@ async function fetchProjectData() {
     });
 
     if (!response.ok) {
+      if (response.status === 403) {
+        window.location.href = '/Login.html';
+      }
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
     const projects = await response.json();
     populateTable(projects);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
+
 
 //-- delete Project --
 function attachDeleteProjectEvents() {
@@ -223,12 +249,20 @@ function attachDetailProjectEvents() {
       const project = await projectResponse.json();
 
       const detailProjectHTML = `
+      <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
         <div class="from-page">
           <div class="page-title">
             <div class="page-arrow">
               <img src="./image/icons/arrow-left.svg" alt="" />
             </div>
-            <h2>Update Project</h2>
+            <h2>Detail Project</h2>
           </div>
           <div class="form">
             <form id="detailProjectForm">
@@ -325,6 +359,14 @@ function attachUpdateProjectEvents() {
       const project = await projectResponse.json();
 
       const updateProjectHTML = `
+      <div class="profile-component">
+          <div class="profile">
+            <div class="profile__title">Trung Huynh</div>
+            <div class="logout">
+              <img src="./image/icons/logout.svg" alt="">
+            </div>
+          </div>
+        </div>
         <div class="from-page">
           <div class="page-title">
             <div class="page-arrow">
@@ -448,20 +490,23 @@ function attachUpdateProjectEvents() {
         $('.box-add-user-project').show();
         fetchUserData();
         searchTable();
-        tableUser = $("#usersTable").DataTable({
-          info: false,
-          paging: false,
-          scrollY: '200px',
-          scrollCollapse: true,
-          lengthChange: false,
-          searching: false,
-          ordering: false,
-          pagingType: "simple_numbers",
-        });
+
+        if (!$.fn.DataTable.isDataTable('#usersTable')) {
+          tableUser = $("#usersTable").DataTable({
+            info: false,
+            paging: false,
+            scrollY: '200px',
+            scrollCollapse: true,
+            lengthChange: false,
+            searching: false,
+            ordering: false,
+            pagingType: "simple_numbers",
+          });
+        }
 
         let timeOut;
         function searchTable() {
-          $("#search").on("input", function () {
+          $("#search").off('input').on("input", function () {
             const query = $(this).val().toLowerCase();
 
             clearTimeout(timeOut);
@@ -474,10 +519,7 @@ function attachUpdateProjectEvents() {
 
         async function fetchUserData(query = null) {
           try {
-            let searchQuery = "";
-            if (query) {
-              searchQuery = "search?q=" + query;
-            }
+            let searchQuery = query ? `search?q=${query}` : '';
             const response = await fetch(`${ENDPOINT}/users/${searchQuery}`);
             const users = await response.json();
             populateTable(query ? users.users : users);
@@ -485,15 +527,16 @@ function attachUpdateProjectEvents() {
             console.error("Error fetching data:", error);
           }
         }
+
         function populateTable(users) {
           tableUser.clear();
           users.forEach((user) => {
             const row = $(`
-                  <tr data-user-id="${user._id}">
-                      <td>${user.username}</td>
-                      <td>${user.email}</td>
-                  </tr>
-              `);
+              <tr data-user-id="${user._id}">
+                  <td>${user.username}</td>
+                  <td>${user.email}</td>
+              </tr>
+            `);
             row.on('click', function () {
               $("tr").removeClass("selected");
               $(this).addClass("selected");
@@ -504,7 +547,7 @@ function attachUpdateProjectEvents() {
           tableUser.draw();
         }
 
-        $('.button__group').on('click', '.add-btn', async function () {
+        $('.button__group').off('click', '.add-btn').on('click', '.add-btn', async function () {
           const selectedUsers = [];
           $('#usersTable tbody tr.selected').each(function () {
             const userId = $(this).data('user-id');
@@ -517,6 +560,30 @@ function attachUpdateProjectEvents() {
           }
 
           try {
+            const projectResponse = await fetch(`${ENDPOINT}/projects/${projectId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+
+            if (!projectResponse.ok) {
+              throw new Error('Lỗi khi lấy thông tin dự án hiện tại');
+            }
+
+            const projectData = await projectResponse.json();
+            const existingMemberIds = projectData.members.map(member => member._id);
+
+            const duplicateUsers = selectedUsers.filter(userId =>
+              existingMemberIds.includes(userId)
+            );
+
+            if (duplicateUsers.length > 0) {
+              alert('Một số người dùng đã là thành viên của dự án.');
+              return;
+            }
+
             const addUsersResponse = await fetch(`${ENDPOINT}/projects/${projectId}/members`, {
               method: 'POST',
               headers: {
@@ -527,28 +594,36 @@ function attachUpdateProjectEvents() {
             });
 
             if (!addUsersResponse.ok) {
-              throw new Error('Error adding members to project');
+              throw new Error('Lỗi khi thêm người dùng vào dự án');
             }
 
-            // alert('Người dùng đã được thêm vào dự án thành công!');
-            console.log(selectedUsers);
-
+            alert('Người dùng đã được thêm vào dự án thành công!');
             $('.box-add-user-project').hide();
-            console.log('Members:', project.members);
-            console.log('Selected Users:', selectedUsers);
-            console.log('Combined Array:', project.members.concat(selectedUsers));
-            if (!Array.isArray(project.members) || !Array.isArray(selectedUsers)) {
-              console.error('Dữ liệu không phải là mảng!');
-              return;
+
+            const updatedProjectResponse = await fetch(`${ENDPOINT}/projects/${projectId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+
+            if (!updatedProjectResponse.ok) {
+              throw new Error('Lỗi khi lấy thông tin dự án cập nhật');
             }
-            populateTableMembers(project.members.concat(selectedUsers), false);
+
+            const updatedProject = await updatedProjectResponse.json();
+            populateTableMembers(updatedProject.members, true);
+            console.log("Updated project members:", updatedProject.members);
+            console.log("Selected users:", selectedUsers);
+
           } catch (error) {
             console.error('Error adding members:', error);
-            // alert('Không thể thêm người dùng vào dự án.');
+            alert('Không thể thêm người dùng vào dự án.');
           }
         });
+      });
 
-      })
 
       $('.box-add-user-project').on('click', '.icon-x', function () {
         $('.box-add-user-project').hide();
@@ -660,6 +735,17 @@ function populateTableMembers(members, isUpdateMode = false) {
   tableMember.draw();
 }
 
-
-
-
+function attachSidebarEvents() {
+  $(".btn__toggle").click(function () {
+    $(".sidebar").toggleClass("collapsed");
+    if ($(".sidebar").hasClass("collapsed")) {
+      $(".logo-a").fadeOut(400, function () {
+        $(".logo-b").fadeIn(400);
+      });
+    } else {
+      $(".logo-b").fadeOut(400, function () {
+        $(".logo-a").fadeIn(400);
+      });
+    }
+  });
+}
